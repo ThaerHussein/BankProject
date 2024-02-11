@@ -22,13 +22,12 @@ import java.util.List;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static final String AUTH_PATH="/api/v1/auth/**";
+    public static final String AUTH_PATH= "/api/v1/auth/**";
 
-    public static final String USER_PATH="/api/v1/user/**";
-
-    private static final List<String> ALLOWED_METHODS= Arrays.asList("GET","PUT","POST","DELETE","OPTIONS","PATCH");
-    private static final List<String> ALLOWED_HEADERS= Arrays.asList("x-request-with","authorization","Content-Type"
-            ,"Authorization","credential","X-XSRF-TOKEN","X-Refresh-Token","X-Client-Id","x-client-id");
+    public static final String USER_PATH = "/api/v1/user/**";
+    private static final List<String> ALLOWED_METHODS = Arrays.asList("GET", "PUT", "POST", "DELETE", "OPTIONS", "PATCH");
+    private static final List<String> ALLOWED_HEADERS = Arrays.asList("x-requested-with", "authorization", "Content-Type",
+            "Authorization", "credential", "X-XSRF-TOKEN", "X-Refresh-Token", "X-Client-Id", "x-client-id");
 
     @Autowired
     private JWTUtil jwtUtil;
@@ -53,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(USER_PATH).hasAuthority("user")
                 .anyRequest().authenticated();
         http.addFilterBefore(new JWTAuthFilter(jwtUtil,userDetailsService), UsernamePasswordAuthenticationFilter.class);
+
     }
 
     private CorsConfiguration getCorsConfiguration(){
@@ -61,11 +61,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         corsConfiguration.setAllowedMethods(ALLOWED_METHODS);
         corsConfiguration.setAllowedOriginPatterns(Collections.singletonList("*"));
         corsConfiguration.setAllowCredentials(true);
+
         return corsConfiguration;
     }
 
-    @Override
     @Bean
+    @Override
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
