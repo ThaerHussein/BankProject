@@ -6,7 +6,6 @@ import com.letcode.SecureBankSystem.bo.auth.CreateSignupRequest;
 import com.letcode.SecureBankSystem.bo.auth.LogoutResponse;
 
 public interface AuthService {
-
     void signup(CreateSignupRequest createSignupRequest);
 
     AuthenticationResponse login(CreateLoginRequest createLoginRequest);
