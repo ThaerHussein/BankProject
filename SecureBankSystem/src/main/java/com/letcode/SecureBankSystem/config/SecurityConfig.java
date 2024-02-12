@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String AUTH_PATH= "/api/v1/auth/**";
 
     public static final String USER_PATH = "/api/v1/user/**";
+    public static final String ADMIN_PATH= "/api/v1/admin-dashboard/**";
     private static final List<String> ALLOWED_METHODS = Arrays.asList("GET", "PUT", "POST", "DELETE", "OPTIONS", "PATCH");
     private static final List<String> ALLOWED_HEADERS = Arrays.asList("x-requested-with", "authorization", "Content-Type",
             "Authorization", "credential", "X-XSRF-TOKEN", "X-Refresh-Token", "X-Client-Id", "x-client-id");
@@ -50,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(AUTH_PATH).permitAll()
                 .antMatchers(USER_PATH).hasAuthority("user")
+                .antMatchers(ADMIN_PATH).hasAuthority("admin")
                 .anyRequest().authenticated();
         http.addFilterBefore(new JWTAuthFilter(jwtUtil,userDetailsService), UsernamePasswordAuthenticationFilter.class);
 

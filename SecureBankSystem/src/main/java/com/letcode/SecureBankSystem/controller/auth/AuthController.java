@@ -1,10 +1,9 @@
-package com.letcode.SecureBankSystem.controller.authcontroller;
+package com.letcode.SecureBankSystem.controller.auth;
 
 import com.letcode.SecureBankSystem.bo.auth.AuthenticationResponse;
 import com.letcode.SecureBankSystem.bo.auth.CreateLoginRequest;
 import com.letcode.SecureBankSystem.bo.auth.CreateSignupRequest;
 import com.letcode.SecureBankSystem.bo.auth.LogoutResponse;
-import com.letcode.SecureBankSystem.bo.user.CreateUserRequest;
 import com.letcode.SecureBankSystem.service.auth.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.letcode.SecureBankSystem.controller.UserController;
+package com.letcode.SecureBankSystem.controller.user;
 
 import com.letcode.SecureBankSystem.bo.user.CreateUserRequest;
 import com.letcode.SecureBankSystem.bo.user.UpdateUserStatusRequest;
