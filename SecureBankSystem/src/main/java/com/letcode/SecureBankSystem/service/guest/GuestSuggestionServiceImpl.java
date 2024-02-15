@@ -4,7 +4,10 @@ import com.letcode.SecureBankSystem.bo.CreateSuggestionRequest;
 import com.letcode.SecureBankSystem.entity.GuestSuggestionEntity;
 import com.letcode.SecureBankSystem.ropsitory.GuestSuggestionRepository;
 import com.letcode.SecureBankSystem.service.functionalinterface.SuggestionProcessor;
+import com.letcode.SecureBankSystem.util.enums.SuggestionStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GuestSuggestionServiceImpl implements GuestSuggestionService{
@@ -14,6 +17,7 @@ public class GuestSuggestionServiceImpl implements GuestSuggestionService{
         this.guestSuggestionRepository = guestSuggestionRepository;
     }
 
+    @Override
     public void processSuggestion(CreateSuggestionRequest suggestionRequest) {
         SuggestionProcessor processor = suggestionText -> {
             GuestSuggestionEntity suggestionEntity = new GuestSuggestionEntity();
@@ -23,5 +27,15 @@ public class GuestSuggestionServiceImpl implements GuestSuggestionService{
         };
 
         processor.process(suggestionRequest.getSuggestionText());
+    }
+
+    @Override
+    public List<GuestSuggestionEntity> findAllCreatedSuggestions() {
+        return guestSuggestionRepository.findByStatus(SuggestionStatus.CREATE);
+    }
+
+    @Override
+    public List<GuestSuggestionEntity> findAllRemovedSuggestions() {
+        return guestSuggestionRepository.findByStatus(SuggestionStatus.REMOVE);
     }
 }
